@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Secret Love Surprise</title>
+  <style>
+    body {
+      background-color: #0b0014;
+      color: #ff99cc;
+      font-family: cursive;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+    #main, #question, #lucky, #poem, #kiss {
+      display: none;
+    }
+    .glow {
+      font-size: 40px;
+      animation: glow 2s ease-in-out infinite alternate;
+      margin-top: 20%;
+    }
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #ff99cc; }
+      to { text-shadow: 0 0 25px #ff3399; }
+    }
+    .balloon {
+      position: absolute;
+      width: 100px;
+      height: 150px;
+      background: red;
+      border-radius: 50% 50% 45% 45%;
+      left: 50%;
+      top: 100%;
+      transform: translateX(-50%);
+      animation: float 5s ease-out forwards;
+    }
+    @keyframes float {
+      0% { top: 100%; }
+      100% { top: 20%; }
+    }
+    .lip {
+      position: absolute;
+      width: 120px;
+      height: auto;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      animation: kiss 2s ease-in-out forwards;
+    }
+    @keyframes kiss {
+      0% { opacity: 0; transform: translate(-50%, -60%) scale(0.5); }
+      100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <div id="passwordPrompt">
+    <h2>Enter the Secret Password</h2>
+    <input type="password" id="password">
+    <button onclick="checkPassword()">Submit</button>
+  </div>
+
+  <div id="question">
+    <h2>Are You Hani's Monkey?</h2>
+    <button onclick="showLucky()">Yes</button>
+  </div>
+
+  <div id="lucky" class="glow">✨ You are SO lucky ✨</div>
+
+  <div id="poem">
+    <p><i>
+    "In moonlit nights and starlit skies,<br>
+    Azzu kty's love, a sweet surprise.<br>
+    Through whispers, dreams, and cosmic art,<br>
+    You dwell forever in my heart."
+    </i></p>
+  </div>
+
+  <div id="kiss">
+    <div class="balloon" onclick="explodeBalloon()"></div>
+  </div>
+
+  <script>
+    function checkPassword() {
+      const pass = document.getElementById('password').value;
+      if (pass === "yufzirunami") {
+        document.getElementById('passwordPrompt').style.display = 'none';
+        document.getElementById('question').style.display = 'block';
+      } else {
+        alert("Wrong password! Try again");
+      }
+    }
+
+    function showLucky() {
+      document.getElementById('question').style.display = 'none';
+      document.getElementById('lucky').style.display = 'block';
+      setTimeout(() => {
+        document.getElementById('lucky').style.display = 'none';
+        document.getElementById('poem').style.display = 'block';
+        setTimeout(() => {
+          document.getElementById('poem').style.display = 'none';
+          document.getElementById('kiss').style.display = 'block';
+        }, 5000);
+      }, 4000);
+    }
+
+    function explodeBalloon() {
+      document.querySelector('.balloon').style.display = 'none';
+      const lip = document.createElement("img");
+      lip.src = "https://i.imgur.com/3UgPUkM.png"; // Lips image
+      lip.className = "lip";
+      document.body.appendChild(lip);
+    }
+  </script>
+</body>
+</html>
